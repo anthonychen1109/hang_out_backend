@@ -7,7 +7,10 @@ class User(models.Model):
     email = models.EmailField()
     password = models.CharField(max_length=50)
 
-class Events(models.Model):
+    def __str__(self):
+        return self.name
+
+class Event(models.Model):
     id = models.AutoField(primary_key=True)
     description = models.TextField()
     title = models.CharField(max_length=50)
@@ -16,6 +19,9 @@ class Events(models.Model):
     img = models.CharField(max_length=255)
     duration = models.IntegerField()
     users = models.ManyToManyField(User)
+
+    def __str__(self):
+        return self.title
 
 class Location(models.Model):
     id = models.AutoField(primary_key=True)
@@ -26,3 +32,6 @@ class Location(models.Model):
     country = models.CharField(max_length=20)
     city = models.CharField(max_length=20)
     events = models.ManyToManyField(Event)
+
+    def __str__(self):
+        return self.name

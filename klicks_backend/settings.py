@@ -37,13 +37,30 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
     'api',
 
-    #third party apps
+    #3rd party apps
     'rest_framework',
+    'corsheaders',
+    # generates tokens on the server
+    'rest_framework.authtoken',
+    # add log-in, log-out, password reset API endpoints
+    'rest_auth',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'rest_auth.registration',
+    'rest_framework_swagger',
 ]
 
+# an email will be sent when a new user is registered, asking them to confirm their account
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend',
+SITE_ID = 1
+
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -103,6 +120,17 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+#PERMISSIONS
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        # 'rest_framework.permissions.AllowAny',
+        'rest_framework.permissions.IsAuthenticated',
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+    ]
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
@@ -122,3 +150,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+# WHITELIST
+
+CORS_ORIGIN_WHITELIST = (
+    'localhost:3000',
+)
