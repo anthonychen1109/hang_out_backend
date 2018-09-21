@@ -4,14 +4,9 @@ from rest_framework.routers import SimpleRouter
 from rest_framework.documentation import include_docs_urls
 from rest_framework_swagger.views import get_swagger_view
 
-from api.views import (
-    UserViewSet,
-    LocationViewSet,
-    EventViewSet
-)
+from api.views import LocationViewSet, EventViewSet
 
 router = SimpleRouter()
-router.register('users', UserViewSet, base_name='users')
 router.register('locations', LocationViewSet, base_name='locations')
 router.register('events', EventViewSet, base_name='events')
 

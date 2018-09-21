@@ -1,15 +1,7 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
-class User(models.Model):
-    id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=100)
-    email = models.EmailField()
-    password = models.CharField(max_length=50)
-
-    def __str__(self):
-        return self.name
-
 class Event(models.Model):
     id = models.AutoField(primary_key=True)
     description = models.TextField()
@@ -18,7 +10,7 @@ class Event(models.Model):
     event_url = models.URLField(max_length=250)
     img = models.CharField(max_length=255)
     duration = models.IntegerField()
-    users = models.ManyToManyField(User)
+    user = models.ForeignKey(User)
 
     def __str__(self):
         return self.title

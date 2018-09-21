@@ -1,14 +1,5 @@
 from rest_framework import serializers
-from .models import (
-    User,
-    Location,
-    Event
-)
-
-class UserSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = ('id', 'name', 'email')
+from .models import Location, Event
 
 class LocationSerializer(serializers.ModelSerializer):
     class Meta:
@@ -28,6 +19,7 @@ class EventSerializer(serializers.ModelSerializer):
         model = Event
         fields = (
             'id',
+            'user',
             'description',
             'title',
             'date_time',
