@@ -1,10 +1,14 @@
 from django.shortcuts import render
 from rest_framework import viewsets
-from .models import Location, Event
+from .models import UserProfile, Location, Event
 
-from .serializers import LocationSerializer, EventSerializer
+from .serializers import UserProfileSerializer, LocationSerializer, EventSerializer
 
 from .permissions import IsAuthorOrReadOnly
+
+class UserProfileViewSet(viewsets.ModelViewSet):
+    queryset = UserProfile.objects.all()
+    serializer_class = UserProfileSerializer
 
 class LocationViewSet(viewsets.ModelViewSet):
     queryset = Location.objects.all()

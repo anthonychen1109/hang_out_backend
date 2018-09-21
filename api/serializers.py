@@ -1,5 +1,10 @@
 from rest_framework import serializers
-from .models import Location, Event
+from .models import UserProfile, Location, Event
+
+class UserProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserProfile
+        fields = ('bio')
 
 class LocationSerializer(serializers.ModelSerializer):
     class Meta:
