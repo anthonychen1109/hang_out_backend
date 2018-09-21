@@ -21,19 +21,6 @@ def create_profile(sender, **kwargs):
 
 post_save.connect(create_profile, sender = User)
 
-class Event(models.Model):
-    id = models.AutoField(primary_key=True)
-    description = models.TextField()
-    title = models.CharField(max_length=50)
-    date_time = models.DateTimeField()
-    event_url = models.URLField(max_length=250, default='')
-    img = models.URLField(max_length=255, default='')
-    duration = models.IntegerField()
-    user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
-
-    def __str__(self):
-        return self.title
-
 class Location(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=100)
@@ -42,7 +29,7 @@ class Location(models.Model):
     lng = models.FloatField()
     country = models.CharField(max_length=20)
     city = models.CharField(max_length=20)
-    events = models.ManyToManyField(Event)
+    # events = models.ManyToManyField(Event)
 
     def __str__(self):
         return self.name
@@ -64,3 +51,17 @@ class Friend(models.Model):
             current_user=current_user
         )
         friend.users.remove(new_friend)
+
+class Event(models.Model):
+    id = models.AutoField(primary_key=True)
+    loc_id = models.ForeignKey(Location)
+    description = models.TextField()
+    title = models.CharField(max_length=50)
+    date_time = models.DateTimeField()
+    event_url = models.URLField(max_length=250, default='')
+    img = models.URLField(max_length=255, default='')
+    duration = models.IntegerField()
+    users = models.ManyToManyField(User)
+
+    def __str__(self):
+        return self.title
