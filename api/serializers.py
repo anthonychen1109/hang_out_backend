@@ -24,11 +24,12 @@ class EventSerializer(serializers.ModelSerializer):
         model = Event
         fields = (
             'id',
-            'user',
+            'loc_id',
             'description',
             'title',
             'date_time',
             'event_url',
             'img',
             'duration'
+            'users',
         )
