@@ -54,7 +54,7 @@ class Friend(models.Model):
 
 class Event(models.Model):
     id = models.AutoField(primary_key=True)
-    loc_id = models.ForeignKey(Location)
+    loc_id = models.ForeignKey(Location, on_delete=models.CASCADE, default=1)
     description = models.TextField()
     title = models.CharField(max_length=50)
     date_time = models.DateTimeField()
