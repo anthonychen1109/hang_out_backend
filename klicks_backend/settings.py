@@ -55,7 +55,7 @@ INSTALLED_APPS = [
 ]
 
 # an email will be sent when a new user is registered, asking them to confirm their account
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend',
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 SITE_ID = 1
 
 MIDDLEWARE = [
