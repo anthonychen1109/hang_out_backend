@@ -8,10 +8,11 @@ from django.db.models.signals import post_save
 class UserProfile(models.Model):
     # set up link to djangos User model
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    name = models.CharField(max_length=50, default='')
     bio = models.TextField()
 
     def __str__(self):
-        return self.user
+        return self.name
 
 # create user profile when we create the default django User
 def create_profile(sender, **kwargs):

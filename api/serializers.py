@@ -4,7 +4,7 @@ from .models import UserProfile, Location, Event
 class UserProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserProfile
-        fields = ('bio')
+        fields = ('name','bio')
 
 class LocationSerializer(serializers.ModelSerializer):
     class Meta:
