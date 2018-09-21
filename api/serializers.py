@@ -30,6 +30,6 @@ class EventSerializer(serializers.ModelSerializer):
             'date_time',
             'event_url',
             'img',
-            'duration'
+            'duration',
             'users',
         )
