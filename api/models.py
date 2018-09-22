@@ -3,6 +3,7 @@ from django.db import models
 from django.contrib.auth.models import User
 # allows you to execute code with actions happening in the DB
 from django.db.models.signals import post_save
+from datetime import datetime
 
 # Create your models here.
 class UserProfile(models.Model):
@@ -40,27 +41,27 @@ class Group(models.Model):
     name = models.CharField(max_length=100)
     category_id = models.ForeignKey(Category, on_delete=models.CASCADE)
     description = models.TextField()
-    users = models.ManyToManyField(User)
-    tags = models.ManyToManyField(Tag)
+    users = models.ManyToManyField(User, related_name='group_users')
+    tags = models.ManyToManyField(Tag, related_name='tags')
 
     def __str__(self):
         return self.name
 
 class Event(models.Model):
     id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=100)
-    address = models.CharField(max_length=100)
-    city = models.CharField(max_length=20)
-    country = models.CharField(max_length=20)
-    date = models.DateTimeField()
-    users = models.ManyToManyField(User)
+    name = models.CharField(max_length=100, default='')
+    address = models.CharField(max_length=100, default='')
+    city = models.CharField(max_length=20, default='')
+    country = models.CharField(max_length=20, default='')
+    date = models.DateTimeField(default=datetime.now, blank=True)
+    users = models.ManyToManyField(User, related_name='event_users')
     # events = models.ManyToManyField(Event)
 
     def __str__(self):
         return self.name
 
 class Friend(models.Model):
-    users = models.ManyToManyField(User)
+    users = models.ManyToManyField(User, related_name='friend_users')
     current_user = models.ForeignKey(User, related_name='owner', null=True, on_delete=models.CASCADE)
 
     @classmethod

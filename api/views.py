@@ -26,7 +26,7 @@ class CategoryViewSet(viewsets.ModelViewSet):
     serializer_class = CategorySerializer
 
 class TagViewSet(viewsets.ModelViewSet):
-    queryset = Tag.obects.all()
+    queryset = Tag.objects.all()
     serializer_class = TagSerializer
 
 class GroupViewSet(viewsets.ModelViewSet):
