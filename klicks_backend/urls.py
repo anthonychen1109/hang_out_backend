@@ -3,13 +3,16 @@ from django.urls import path, include
 from rest_framework.routers import SimpleRouter
 from rest_framework.documentation import include_docs_urls
 from rest_framework_swagger.views import get_swagger_view
+from django.contrib.auth.views import login
 
-from api.views import UserProfileViewSet, LocationViewSet, EventViewSet
+from api.views import UserProfileViewSet, EventViewSet, CategoryViewSet, TagViewSet, GroupViewSet
 
 router = SimpleRouter()
 router.register('profile', UserProfileViewSet, base_name='profile')
-router.register('locations', LocationViewSet, base_name='locations')
 router.register('events', EventViewSet, base_name='events')
+router.register('categories', CategoryViewSet, base_name='categories')
+router.register('tags', TagViewSet, base_name='tags')
+router.register('groups', GroupViewSet, base_name='groups')
 
 API_TITLE = 'Klick'
 API_DESCRIPTION = 'A tech meetup planner'
@@ -27,4 +30,5 @@ urlpatterns = [
     path('api/v1/rest-auth/registration/', include('rest_auth.registration.urls')),
     path('docs/', include_docs_urls(title=API_TITLE, description=API_DESCRIPTION)),
     path('swagger-docs/', schema_view),
+    path('login/')
 ]

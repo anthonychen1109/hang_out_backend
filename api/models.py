@@ -9,7 +9,6 @@ class UserProfile(models.Model):
     # set up link to djangos User model
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=50, default='')
-    bio = models.TextField()
 
     def __str__(self):
         return self.name
@@ -21,14 +20,40 @@ def create_profile(sender, **kwargs):
 
 post_save.connect(create_profile, sender = User)
 
-class Location(models.Model):
+class Category(models.Model):
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+
+class Tag(models.Model):
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.name
+
+class Group(models.Model):
+    id = models.AutoField(primary_key=True)
+    admin_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    name = models.CharField(max_length=100)
+    category_id = models.ForeignKey(Category, on_delete=models.CASCADE)
+    description = models.TextField()
+    users = models.ManyToManyField(User)
+    tags = models.ManyToManyField(Tag)
+
+    def __str__(self):
+        return self.name
+
+class Event(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=100)
     address = models.CharField(max_length=100)
-    lat = models.FloatField()
-    lng = models.FloatField()
-    country = models.CharField(max_length=20)
     city = models.CharField(max_length=20)
+    country = models.CharField(max_length=20)
+    date = models.DateTimeField()
+    users = models.ManyToManyField(User)
     # events = models.ManyToManyField(Event)
 
     def __str__(self):
@@ -51,17 +76,3 @@ class Friend(models.Model):
             current_user=current_user
         )
         friend.users.remove(new_friend)
-
-class Event(models.Model):
-    id = models.AutoField(primary_key=True)
-    loc_id = models.ForeignKey(Location, on_delete=models.CASCADE, default=1)
-    description = models.TextField()
-    title = models.CharField(max_length=50)
-    date_time = models.DateTimeField()
-    event_url = models.URLField(max_length=250, default='')
-    img = models.URLField(max_length=255, default='')
-    duration = models.IntegerField()
-    users = models.ManyToManyField(User)
-
-    def __str__(self):
-        return self.title

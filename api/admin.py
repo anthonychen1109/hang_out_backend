@@ -1,8 +1,9 @@
 from django.contrib import admin
-from .models import UserProfile, Location, Event, Friend
+from .models import UserProfile, Event, Category, Tag, Group
 
 # Register your models here.
 admin.site.register(UserProfile)
-admin.site.register(Location)
 admin.site.register(Event)
-admin.site.register(Friend)
+admin.site.register(Category)
+admin.site.register(Tag)
+admin.site.register(Group)

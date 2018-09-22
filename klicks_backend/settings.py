@@ -157,3 +157,5 @@ STATIC_URL = '/static/'
 CORS_ORIGIN_WHITELIST = (
     'localhost:3000',
 )
+
+LOGIN_REDIRECT_URL = 'http://127.0.0.1:8000/api/v1/profile/'
