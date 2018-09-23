@@ -4,7 +4,7 @@ from .models import UserProfile, Category, Group, Event, Tag
 class UserProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserProfile
-        fields = ('name','bio')
+        fields = ('__all__')
 
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:

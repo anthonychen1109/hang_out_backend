@@ -123,8 +123,8 @@ AUTH_PASSWORD_VALIDATORS = [
 #PERMISSIONS
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
-        # 'rest_framework.permissions.AllowAny',
-        'rest_framework.permissions.IsAuthenticated',
+        'rest_framework.permissions.AllowAny',
+        # 'rest_framework.permissions.IsAuthenticated',
     ],
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.SessionAuthentication',
@@ -156,6 +156,7 @@ STATIC_URL = '/static/'
 
 CORS_ORIGIN_WHITELIST = (
     'localhost:3000',
+    'localhost:3000/home',
 )
 
 LOGIN_REDIRECT_URL = 'http://127.0.0.1:8000/api/v1/profile/'
