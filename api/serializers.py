@@ -9,7 +9,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
-        fields = ('id', 'name')
+        fields = ('id', 'name', 'cat_img')
 
 class TagSerializer(serializers.ModelSerializer):
     class Meta:
@@ -17,6 +17,13 @@ class TagSerializer(serializers.ModelSerializer):
         fields = ('id', 'name')
 
 class GroupSerializer(serializers.ModelSerializer):
+    num_users = serializers.SerializerMethodField()
+    # adds methods to serializers
+    tags = serializers.StringRelatedField(many=True)
+    category_id = serializers.StringRelatedField()
+    admin_id = serializers.StringRelatedField()
+    # serializer relationships and represent them as strings
+    users = serializers.StringRelatedField(many=True)
     class Meta:
         model = Group
         fields = (
@@ -26,8 +33,12 @@ class GroupSerializer(serializers.ModelSerializer):
             'category_id',
             'description',
             'users',
-            'tags'
+            'tags',
+            'num_users',
         )
+    
+    def get_num_users(self, obj):
+        return obj.num_users()
 
 class EventSerializer(serializers.ModelSerializer):
     class Meta:
@@ -39,5 +50,6 @@ class EventSerializer(serializers.ModelSerializer):
             'country',
             'city',
             'date',
-            'users'
+            'users',
+            'group_id',
         )

@@ -24,6 +24,7 @@ post_save.connect(create_profile, sender = User)
 class Category(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=100)
+    cat_img = models.CharField(max_length=255, default='')
 
     def __str__(self):
         return self.name
@@ -44,6 +45,9 @@ class Group(models.Model):
     users = models.ManyToManyField(User, related_name='group_users')
     tags = models.ManyToManyField(Tag, related_name='tags')
 
+    def num_users(self):
+        return self.users.all().count()
+
     def __str__(self):
         return self.name
 
@@ -55,6 +59,7 @@ class Event(models.Model):
     country = models.CharField(max_length=20, default='')
     date = models.DateTimeField(default=datetime.now, blank=True)
     users = models.ManyToManyField(User, related_name='event_users')
+    group_id = models.ForeignKey(Group, on_delete=models.CASCADE)
     # events = models.ManyToManyField(Event)
 
     def __str__(self):
