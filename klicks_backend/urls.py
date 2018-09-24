@@ -9,14 +9,14 @@ from rest_framework.authtoken.views import obtain_auth_token
 from api.views import UserProfileViewSet, EventViewSet, CategoryViewSet, TagViewSet, GroupViewSet
 
 router = SimpleRouter()
-router.register('profile', UserProfileViewSet, base_name='profile')
+router.register('profiles', UserProfileViewSet, base_name='profile')
 router.register('events', EventViewSet, base_name='events')
 router.register('categories', CategoryViewSet, base_name='categories')
 router.register('tags', TagViewSet, base_name='tags')
 router.register('groups', GroupViewSet, base_name='groups')
 
-API_TITLE = 'Klick'
-API_DESCRIPTION = 'A tech meetup planner'
+API_TITLE = 'Hang Outs'
+API_DESCRIPTION = 'A meetup planner'
 schema_view = get_swagger_view(title=API_TITLE)
 
 
