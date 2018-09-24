@@ -26,7 +26,7 @@ urlpatterns = [
     # for easy admin login/ logout
     path('api-auth/', include('rest_framework.urls')),
     # route for log-in, log-out, password reset API endpoints
-    path('api/v1/rest-auth', include('rest_auth.urls')),
+    path('api/v1/rest-auth/', include('rest_auth.urls')),
     # route for user signup
     path('api/v1/rest-auth/registration/', include('rest_auth.registration.urls')),
     path('docs/', include_docs_urls(title=API_TITLE, description=API_DESCRIPTION)),

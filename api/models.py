@@ -10,6 +10,7 @@ class UserProfile(models.Model):
     # set up link to djangos User model
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=50, default='')
+    email = models.EmailField(default='')
 
     def __str__(self):
         return self.name
@@ -24,7 +25,7 @@ post_save.connect(create_profile, sender = User)
 class Category(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=100)
-    cat_img = models.CharField(max_length=255, default='')
+    cat_img = models.TextField()
 
     def __str__(self):
         return self.name
