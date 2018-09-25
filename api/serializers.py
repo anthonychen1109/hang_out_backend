@@ -6,10 +6,6 @@ class UserProfileSerializer(serializers.ModelSerializer):
         model = UserProfile
         fields = ('__all__')
 
-class CategorySerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Category
-        fields = ('id', 'name', 'cat_img')
 
 class TagSerializer(serializers.ModelSerializer):
     class Meta:
@@ -39,6 +35,13 @@ class GroupSerializer(serializers.ModelSerializer):
 
     def get_num_users(self, obj):
         return obj.num_users()
+
+class CategorySerializer(serializers.ModelSerializer):
+    groups = GroupSerializer(source='cat_group', many=True)
+    class Meta:
+        model = Category
+        fields = ('id', 'name', 'cat_img', 'groups')
+        # depth = 1
 
 class EventSerializer(serializers.ModelSerializer):
     class Meta:
