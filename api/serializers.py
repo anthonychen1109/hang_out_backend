@@ -38,7 +38,7 @@ class UserSerializerWithToken(serializers.ModelSerializer):
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
-        fields = ('id', 'name', 'cat_img')
+        fields = ('id', 'name', 'cat_img', 'category_id')
 
 class TagSerializer(serializers.ModelSerializer):
     class Meta:

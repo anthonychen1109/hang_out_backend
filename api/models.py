@@ -45,6 +45,7 @@ class Group(models.Model):
     description = models.TextField()
     users = models.ManyToManyField(User, related_name='group_users')
     tags = models.ManyToManyField(Tag, related_name='tags')
+    category_id = models.ForeignKey(Category, on_delete=models.CASCADE)
 
     def num_users(self):
         return self.users.all().count()
