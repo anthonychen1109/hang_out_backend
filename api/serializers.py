@@ -19,24 +19,24 @@ class TagSerializer(serializers.ModelSerializer):
 class GroupSerializer(serializers.ModelSerializer):
     num_users = serializers.SerializerMethodField()
     # adds methods to serializers
-    tags = serializers.StringRelatedField(many=True)
-    category_id = serializers.StringRelatedField()
-    admin_id = serializers.StringRelatedField()
+    # tags = serializers.StringRelatedField(many=True)
+    # category = serializers.StringRelatedField()
+    # admin_id = serializers.StringRelatedField()
     # serializer relationships and represent them as strings
-    users = serializers.StringRelatedField(many=True)
+    # users = serializers.StringRelatedField(many=True)
     class Meta:
         model = Group
         fields = (
             'id',
-            'admin_id',
+            'group_creator',
             'name',
-            'category_id',
+            'category',
             'description',
             'users',
-            'tags',
+            # 'tags',
             'num_users',
         )
-    
+
     def get_num_users(self, obj):
         return obj.num_users()
 

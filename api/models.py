@@ -39,12 +39,12 @@ class Tag(models.Model):
 
 class Group(models.Model):
     id = models.AutoField(primary_key=True)
-    admin_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    group_creator = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
-    category_id = models.ForeignKey(Category, on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
     description = models.TextField()
-    users = models.ManyToManyField(User, related_name='group_users')
-    tags = models.ManyToManyField(Tag, related_name='tags')
+    users = models.ManyToManyField(User, related_name='group_users', default=1)
+    # tags = models.ManyToManyField(Tag, related_name='tags')
 
     def num_users(self):
         return self.users.all().count()
