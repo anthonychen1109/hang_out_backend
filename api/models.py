@@ -6,28 +6,28 @@ from django.db.models.signals import post_save
 from datetime import datetime
 
 # Create your models here.
-class UserProfile(models.Model):
-    # set up link to djangos User model
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    name = models.CharField(max_length=50, default='')
-    email = models.EmailField(default='')
-
-    def __str__(self):
-        return self.name
+# class UserProfile(User):
+#     # set up link to djangos User model
+#     user = models.OneToOneField(User, on_delete=models.CASCADE)
+#     name = models.CharField(max_length=50, default='')
+#     email = models.EmailField(default='')
+#
+#     def __str__(self):
+#         return self.name
 
 # create user profile when we create the default django User
-def create_profile(sender, **kwargs):
-    if kwargs['created']:
-        user_profile = UserProfile.objects.create(user=kwargs['instance'])
-
-post_save.connect(create_profile, sender = User)
+# def create_profile(sender, **kwargs):
+#     if kwargs['created']:
+#         user_profile = UserProfile.objects.create(user=kwargs['instance'])
+#
+# post_save.connect(create_profile, sender = User)
 
 class Category(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=100)
     cat_img = models.TextField()
 
-    
+
 
     def __str__(self):
         return self.name
