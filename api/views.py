@@ -57,7 +57,7 @@ class UserList(APIView):
 
 class EventViewSet(viewsets.ModelViewSet):
     # permission_classes = (IsAuthorOrReadOnly)
-    import pdb; pdb.set_trace()
+    # import pdb; pdb.set_trace()
     queryset = Event.objects.all()
     serializer_class = EventSerializer
     permission_classes = [IsAuthenticatedOrReadOnly,]
