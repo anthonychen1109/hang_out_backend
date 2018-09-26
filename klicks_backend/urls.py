@@ -7,10 +7,10 @@ from rest_framework_swagger.views import get_swagger_view
 from rest_framework_jwt.views import obtain_jwt_token
 # from django.contrib.auth.views import login
 
-from api.views import EventViewSet, CategoryViewSet, TagViewSet, GroupViewSet
+from api.views import UserViewSet, EventViewSet, CategoryViewSet, TagViewSet, GroupViewSet
 
 router = SimpleRouter()
-# router.register('profiles', UserProfileViewSet, base_name='profile')
+router.register('profiles', UserViewSet, base_name='profile')
 router.register('events', EventViewSet, base_name='events')
 router.register('categories', CategoryViewSet, base_name='categories')
 router.register('tags', TagViewSet, base_name='tags')
@@ -33,7 +33,7 @@ urlpatterns = [
     # path('yth', include_docs_urls(title=API_TITLE, description=API_DESCRIPTION)),
     path('swagger-docs/', schema_view),
     path('token-auth/', obtain_jwt_token),
-    path('', include('api.urls'))
+    path('api/', include('api.urls'))
     # path('api-token-auth/', obtain_auth_token),
 
 ]

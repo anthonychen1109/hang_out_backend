@@ -3,7 +3,7 @@ from rest_framework_jwt.settings import api_settings
 from django.contrib.auth.models import User
 
 from .models import (
-    # UserProfile,
+    # User,
     Category,
     Group,
     Event,
@@ -96,4 +96,5 @@ class EventSerializer(serializers.ModelSerializer):
             'date',
             'users',
             'group_id',
+            'event_img',
         )

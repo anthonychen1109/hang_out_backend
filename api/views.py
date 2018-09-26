@@ -18,7 +18,8 @@ from .models import (
 )
 
 from .serializers import (
-    # UserProfileSerializer,
+    UserSerializer,
+    UserSerializerWithToken,
     EventSerializer,
     CategorySerializer,
     TagSerializer,
@@ -50,10 +51,10 @@ class UserList(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-# class UserProfileViewSet(viewsets.ModelViewSet):
-#     queryset = UserProfile.objects.all()
-#     serializer_class = UserProfileSerializer
-#     authentication_classes = [TokenAuthentication,]
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    # authentication_classes = [TokenAuthentication,]
 
 class EventViewSet(viewsets.ModelViewSet):
     # permission_classes = (IsAuthorOrReadOnly)
