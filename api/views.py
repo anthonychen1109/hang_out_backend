@@ -54,6 +54,7 @@ class UserList(APIView):
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+    permission_classes = (AllowAny,)
     # authentication_classes = [TokenAuthentication,]
 
 class EventViewSet(viewsets.ModelViewSet):
