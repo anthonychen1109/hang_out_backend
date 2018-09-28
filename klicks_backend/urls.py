@@ -25,7 +25,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/v1/', include(router.urls)),
     # for easy admin login/ logout
-    # path('api-auth/', include('rest_framework.urls')),
+    path('api-auth/', include('rest_framework.urls')),
     # route for log-in, log-out, password reset API endpoints
     # path('api/v1/rest-auth/', include('rest_auth.urls')),
     # route for user signup

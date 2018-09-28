@@ -46,6 +46,7 @@ class Group(models.Model):
     category = models.ForeignKey(Category, related_name='cat_group', on_delete=models.CASCADE)
     description = models.TextField()
     users = models.ManyToManyField(User, related_name='group_users', default=1)
+    group_img = models.TextField(default="")
     # tags = models.ManyToManyField(Tag, related_name='tags')
 
     def num_users(self):

@@ -143,3 +143,5 @@ CORS_ORIGIN_WHITELIST = (
 JWT_AUTH = {
     'JWT_RESPONSE_PAYLOAD_HANDLER': 'klicks_backend.utils.my_jwt_response_handler'
 }
+
+LOGIN_REDIRECT_URL = '/api/current_user/'
