@@ -37,7 +37,7 @@ class GroupSerializer(serializers.ModelSerializer):
         model = Group
         fields = (
             'id',
-            'group_creator',
+            # 'group_creator',
             'name',
             'category',
             'description',
