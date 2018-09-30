@@ -14,31 +14,6 @@ class TagSerializer(serializers.ModelSerializer):
         model = Tag
         fields = ('id', 'name')
 
-class GroupSerializer(serializers.ModelSerializer):
-    num_users = serializers.SerializerMethodField()
-    class Meta:
-        model = Group
-        fields = (
-            'id',
-            'group_creator',
-            'name',
-            'category',
-            'description',
-            'users',
-            # 'tags',
-            'num_users',
-            'group_img',
-        )
-
-    def get_num_users(self, obj):
-        return obj.num_users()
-
-class CategorySerializer(serializers.ModelSerializer):
-    groups = GroupSerializer(source='cat_group', many=True)
-    class Meta:
-        model = Category
-        fields = ('id', 'name', 'cat_img', 'groups')
-
 class EventSerializer(serializers.ModelSerializer):
     class Meta:
         model = Event
@@ -53,6 +28,35 @@ class EventSerializer(serializers.ModelSerializer):
             'group_id',
             'event_img',
         )
+
+class GroupSerializer(serializers.ModelSerializer):
+    num_users = serializers.SerializerMethodField()
+    organizer_name = serializers.ReadOnlyField(source='group_creator.username')
+    events = EventSerializer(source="group_events", many=True)
+    class Meta:
+        model = Group
+        fields = (
+            'id',
+            'group_creator',
+            'name',
+            'category',
+            'description',
+            'users',
+            # 'tags',
+            'num_users',
+            'group_img',
+            'organizer_name',
+            'events',
+        )
+
+    def get_num_users(self, obj):
+        return obj.num_users()
+
+class CategorySerializer(serializers.ModelSerializer):
+    groups = GroupSerializer(source='cat_group', many=True)
+    class Meta:
+        model = Category
+        fields = ('id', 'name', 'cat_img', 'groups')
 
 class UserSerializerWithToken(serializers.ModelSerializer):
 

@@ -27,8 +27,6 @@ class Category(models.Model):
     name = models.CharField(max_length=100)
     cat_img = models.TextField()
 
-
-
     def __str__(self):
         return self.name
 
@@ -41,7 +39,7 @@ class Tag(models.Model):
 
 class Group(models.Model):
     id = models.AutoField(primary_key=True)
-    group_creator = models.ForeignKey(User, on_delete=models.CASCADE)
+    group_creator = models.ForeignKey(User, on_delete=models.CASCADE, related_name="organizer_name")
     name = models.CharField(max_length=100)
     category = models.ForeignKey(Category, related_name='cat_group', on_delete=models.CASCADE)
     description = models.TextField()
@@ -63,7 +61,7 @@ class Event(models.Model):
     country = models.CharField(max_length=20, default='')
     date = models.DateTimeField(default=datetime.now, blank=True)
     users = models.ManyToManyField(User, related_name='event_users')
-    group_id = models.ForeignKey(Group, on_delete=models.CASCADE)
+    group_id = models.ForeignKey(Group, related_name="group_events", on_delete=models.CASCADE)
     event_img = models.TextField(default='')
     # events = models.ManyToManyField(Event)
 
