@@ -63,6 +63,7 @@ class Event(models.Model):
     users = models.ManyToManyField(User, related_name='event_users')
     group_id = models.ForeignKey(Group, related_name="group_events", on_delete=models.CASCADE)
     event_img = models.TextField(default='')
+    details = models.TextField(default='')
     # events = models.ManyToManyField(Event)
 
     def __str__(self):

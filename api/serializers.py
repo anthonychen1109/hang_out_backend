@@ -27,6 +27,7 @@ class EventSerializer(serializers.ModelSerializer):
             'users',
             'group_id',
             'event_img',
+            'details',
         )
 
 class GroupSerializer(serializers.ModelSerializer):
