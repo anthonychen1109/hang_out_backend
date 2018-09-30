@@ -62,18 +62,21 @@ class EventViewSet(viewsets.ModelViewSet):
     # import pdb; pdb.set_trace()
     queryset = Event.objects.all()
     serializer_class = EventSerializer
-    permission_classes = [IsAuthenticatedOrReadOnly,]
+    permission_classes = (AllowAny,)
+    # permission_classes = [IsAuthenticatedOrReadOnly,]
     # if events belong to user then display
 
 class CategoryViewSet(viewsets.ModelViewSet):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
-    permission_classes = [IsAuthenticatedOrReadOnly,]
+    permission_classes = (AllowAny,)
+    # permission_classes = [IsAuthenticatedOrReadOnly,]
 
 class TagViewSet(viewsets.ModelViewSet):
     queryset = Tag.objects.all()
     serializer_class = TagSerializer
-    permission_classes = [IsAuthenticatedOrReadOnly,]
+    permission_classes = (AllowAny,)
+    # permission_classes = [IsAuthenticatedOrReadOnly,]
 
 class GroupViewSet(viewsets.ModelViewSet):
     queryset = Group.objects.all()
