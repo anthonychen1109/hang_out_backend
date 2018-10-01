@@ -81,4 +81,4 @@ class TagViewSet(viewsets.ModelViewSet):
 class GroupViewSet(viewsets.ModelViewSet):
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
-    permission_classes = [AllowAny,]
+    permission_classes = (AllowAny,)

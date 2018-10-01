@@ -80,8 +80,12 @@ WSGI_APPLICATION = 'klicks_backend.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'api',
+        'USER': 'postgres',
+        'PASSWORD': 'admin',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
     }
 }
 
@@ -140,7 +144,12 @@ STATIC_URL = '/static/'
 
 CORS_ORIGIN_WHITELIST = (
     'localhost:3000',
+    'http://localhost:3000',
+    'http://localhost:3000/'
 )
+
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = False
 
 JWT_AUTH = {
     'JWT_RESPONSE_PAYLOAD_HANDLER': 'klicks_backend.utils.my_jwt_response_handler'
