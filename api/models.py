@@ -39,7 +39,8 @@ class Tag(models.Model):
 
 class Group(models.Model):
     id = models.AutoField(primary_key=True)
-    group_creator = models.ForeignKey(User, on_delete=models.CASCADE, related_name="organizer_name")
+    hometown = models.CharField(max_length=255, default='')
+    group_creator = models.ForeignKey(User, on_delete=models.CASCADE, related_name="organizer_name", default=1)
     name = models.CharField(max_length=100)
     category = models.ForeignKey(Category, related_name='cat_group', on_delete=models.CASCADE)
     description = models.TextField()
