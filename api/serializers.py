@@ -32,6 +32,7 @@ class EventSerializer(serializers.ModelSerializer):
 
 class GroupSerializer(serializers.ModelSerializer):
     num_users = serializers.SerializerMethodField()
+    user_names = serializers.SerializerMethodField()
     organizer_name = serializers.ReadOnlyField(source='group_creator.username')
     events = EventSerializer(source="group_events", many=True, read_only=True)
     class Meta:
@@ -49,8 +50,12 @@ class GroupSerializer(serializers.ModelSerializer):
             'organizer_name',
             'events',
             'hometown',
+            'user_names',
         )
 
+    def get_user_names(self, obj):
+        return obj.user_names()
+        
     def get_num_users(self, obj):
         return obj.num_users()
 

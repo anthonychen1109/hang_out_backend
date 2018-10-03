@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from rest_framework import viewsets, status
+from rest_framework.views import APIView
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import AllowAny, IsAuthenticatedOrReadOnly, IsAdminUser
 from rest_framework.decorators import api_view
@@ -82,3 +83,13 @@ class GroupViewSet(viewsets.ModelViewSet):
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
     permission_classes = (AllowAny,)
+
+# class GroupViewSet(APIView):
+#
+#     def get(self, request):
+#         groups = Group.objects.all()
+#         serializer = GroupSerializer(groups, many=True)
+#         return Response(serializer.data)
+#
+#     def put(self, request):
+#         import pdb;pdb.set_trace()

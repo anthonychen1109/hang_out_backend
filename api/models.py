@@ -48,6 +48,11 @@ class Group(models.Model):
     group_img = models.TextField(default="")
     # tags = models.ManyToManyField(Tag, related_name='tags')
 
+    def user_names(self):
+        user_names = self.users.all()
+        data = [str(usr) for usr in user_names]
+        return data
+
     def num_users(self):
         return self.users.all().count()
 
