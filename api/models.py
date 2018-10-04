@@ -72,6 +72,11 @@ class Event(models.Model):
     details = models.TextField(default='')
     # events = models.ManyToManyField(Event)
 
+    def organizer(self):
+        user_names = self.users.all()
+        data = [str(usr) for usr in user_names]
+        return data[0]
+
     def __str__(self):
         return self.name
 

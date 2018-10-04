@@ -15,6 +15,7 @@ class TagSerializer(serializers.ModelSerializer):
         fields = ('id', 'name')
 
 class EventSerializer(serializers.ModelSerializer):
+    organizer = serializers.SerializerMethodField()
     class Meta:
         model = Event
         fields = (
@@ -28,7 +29,11 @@ class EventSerializer(serializers.ModelSerializer):
             'group_id',
             'event_img',
             'details',
+            'organizer'
         )
+
+    def get_organizer(self, obj):
+        return obj.organizer() 
 
 class GroupSerializer(serializers.ModelSerializer):
     num_users = serializers.SerializerMethodField()
@@ -55,7 +60,7 @@ class GroupSerializer(serializers.ModelSerializer):
 
     def get_user_names(self, obj):
         return obj.user_names()
-        
+
     def get_num_users(self, obj):
         return obj.num_users()
 
