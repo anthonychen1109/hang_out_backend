@@ -1,15 +1,22 @@
 import os
-# from decouple import config
+from dotenv import load_dotenv
+from os.path import join, dirname
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-# SECRET_KEY = config('SECRET_KEY')
-SECRET_KEY='tscb9+c$yntvz8zfea(5j-f)k^o)=x-eed5_c(&+z08z3ukp!f'
-# DEBUG = config('DEBUG', default=False, cast=bool)
-DEBUG = True
 
-ALLOWED_HOSTS = []
+
+# DEBUG = config('DEBUG', default=False, cast=bool)
+# DEBUG = True
+
+dotenv_path = join(dirname(__file__), '.env')
+load_dotenv(dotenv_path)
+
+SECRET_KEY = os.environ.get("SECRET_KEY")
+DATABASE_PASSWORD = os.environ.get("DATABASE_PASSWORD")
+
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -156,3 +163,13 @@ JWT_AUTH = {
 }
 
 LOGIN_REDIRECT_URL = '/api/current_user/'
+
+load_dotenv()
+
+# OR, the same with increased verbosity:
+load_dotenv(verbose=True)
+
+# OR, explicitly providing path to '.env'
+from pathlib import Path  # python3 only
+env_path = Path('.') / '.env'
+load_dotenv(dotenv_path=env_path)
