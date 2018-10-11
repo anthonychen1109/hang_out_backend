@@ -1,22 +1,19 @@
 import os
-from dotenv import load_dotenv
-from os.path import join, dirname
+# from decouple import config
+import dotenv
+import dj_database_url
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+dotenv_file = os.path.join(BASE_DIR, ".env")
+if os.path.isfile(dotenv_file):
+    dotenv.load_dotenv(dotenv_file)
 
+DATABASES = {}
+DATABASES['default'] = dj_database_url.config(conn_max_age=600)
 
-# DEBUG = config('DEBUG', default=False, cast=bool)
-# DEBUG = True
-
-dotenv_path = join(dirname(__file__), '.env')
-load_dotenv(dotenv_path)
-
-SECRET_KEY = os.environ.get("SECRET_KEY")
-DATABASE_PASSWORD = os.environ.get("DATABASE_PASSWORD")
-
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -85,16 +82,7 @@ WSGI_APPLICATION = 'klicks_backend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'api',
-        'USER': 'postgres',
-        'PASSWORD': 'admin',
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
-    }
-}
+
 
 
 # Password validation
@@ -163,13 +151,3 @@ JWT_AUTH = {
 }
 
 LOGIN_REDIRECT_URL = '/api/current_user/'
-
-load_dotenv()
-
-# OR, the same with increased verbosity:
-load_dotenv(verbose=True)
-
-# OR, explicitly providing path to '.env'
-from pathlib import Path  # python3 only
-env_path = Path('.') / '.env'
-load_dotenv(dotenv_path=env_path)
