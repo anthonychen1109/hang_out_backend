@@ -139,7 +139,7 @@ pkginfo==1.4.1
 ply==3.10
 post==1.0.2
 prompt-toolkit==1.0.15
-psutil==5.4.0
+psutil==5.6.6
 psycopg2==2.7.5
 ptyprocess==0.5.2
 public==1.0.3
